@@ -1,0 +1,47 @@
+% This code uses the tikz package
+\begin{tikzpicture}
+\node (v0) at (0.729,-0.445) {Low};
+\node (v1) at (0.256,-0.455) {Smoke};
+\node (v2) at (0.393,-0.110) {age};
+\node (v3) at (0.526,-0.535) {blp};
+\node (v4) at (0.233,-0.782) {neonatal};
+\node (v5) at (0.631,-0.138) {order};
+\node (v6) at (0.431,-0.783) {preterm};
+\draw [->] (v1) edge (v0);
+\draw [->] (v1) edge (v3);
+\draw [->] (v1) edge (v6);
+\draw [->] (v2) edge (v0);
+\draw [->] (v2) edge (v1);
+\draw [->] (v2) edge (v3);
+\draw [->] (v2) edge (v5);
+\draw [->] (v3) edge (v0);
+\draw [->] (v3) edge (v6);
+\draw [->] (v5) edge (v0);
+\draw [->] (v6) edge (v0);
+\draw [->] (v6) edge (v4);
+\draw [->] (v2) edge (v6);
+\end{tikzpicture}
+
+dag {
+bb="0,0,1,1"
+Low [outcome,pos="0.729,0.445"]
+Smoke [exposure,pos="0.256,0.455"]
+age [adjusted,pos="0.393,0.110"]
+blp [pos="0.526,0.535"]
+neonatal [pos="0.233,0.782"]
+order [pos="0.631,0.138"]
+preterm [pos="0.431,0.783"]
+Smoke -> Low
+Smoke -> blp
+Smoke -> preterm
+age -> Low
+age -> Smoke
+age -> blp
+age -> order
+age -> preterm
+blp -> Low
+blp -> preterm
+order -> Low
+preterm -> Low
+preterm -> neonatal
+}
